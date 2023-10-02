@@ -129,14 +129,39 @@ header {
 }
 
 /* Clock SVG */
-.clock {
-	min-width: 275px;
+.clock--analog {
+	min-width: 350px;
+	height: 350px;
+}
+
+.clock--digital-bg {
+	height: 210px;
+	width: 260px;
+	fill: #252525;
+}
+
+.clock--digital {
+	font-size: 36px;
+	font-family: 'Cursed Timer ULiL', sans-serif;
+	fill: #fff;
+}
+
+.clock--am,
+.clock--pm {
+	font-size: 18px;
+	font-family: 'Anonymous Pro', monospace;
+	fill: rgba(160, 160, 160, 0.9);
+}
+
+.clock--am.active,
+.clock--pm.active {
+	fill: #fff;
 }
 
 .clock--border {
 	fill: transparent;
-	stroke: #000;
-	stroke-width: 6;
+	stroke: #000000;
+	stroke-width: 10;
 }
 
 .clock--ring-minutes {

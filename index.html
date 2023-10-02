@@ -57,12 +57,8 @@
 			<section class="time-card-wrapper">
 				<h1>New York</h1>
 				<div class="clock-wrapper">
-					<svg
-						class="clock"
-						width="250"
-						height="250"
-						viewBox="-130 -130 260 260"
-					>
+					<svg class="clock--analog" viewBox="-130 -130 260 350">
+						<rect class="clock--digital-bg" x="-130" y="0" />
 						<circle class="clock--ring-minutes" r="120" pathlength="60" />
 						<circle class="clock--border" cx="0" cy="0" r="125" />
 						<text class="clock--text-hours" x="0" y="-95" text-anchor="middle">
@@ -177,6 +173,9 @@
 							y2="-105"
 						/>
 						<circle class="clock--center-ring" r="3" />
+						<text class="clock--digital" x="-78" y="172">8:42:23</text>
+						<text class="clock--am" x="30" y="192">AM</text>
+						<text class="clock--pm active" x="60" y="192">PM</text>
 					</svg>
 				</div>
 				<div>Text content only</div>
