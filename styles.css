@@ -49,10 +49,34 @@ button {
 	border: 0;
 }
 
+header,
+footer {
+	align-self: end;
+	text-align: end;
+}
+
+footer {
+	color: #747474;
+	font-size: 12px;
+}
+
+a {
+	color: #4b4b4b;
+	font-weight: 500;
+
+	transition: all 200ms ease-in;
+}
+
+a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
 ul {
 	list-style-type: none;
 }
 
+/* Main Container Layout */
 main {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -65,17 +89,7 @@ section {
 	margin: 16px auto;
 }
 
-/* 
-font-family: 'Anonymous Pro', monospace;
-font-family: 'DM Mono', monospace;
-font-family: 'Cursed Timer ULiL', sans-serif; 
-*/
-
 /* Option Buttons */
-header {
-	align-self: end;
-}
-
 .option-button-group {
 	display: flex;
 	gap: 14px;
@@ -248,7 +262,7 @@ header {
 	fill: #fff;
 }
 
-/* Data Text */
+/* Data Text Inside Time Card */
 .tz-data-wrapper {
 	align-self: start;
 }
