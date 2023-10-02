@@ -10,6 +10,10 @@
 	padding: 0;
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	height: 100%;
 	background-color: #fcfcfc;
@@ -274,17 +278,8 @@ select {
 	stroke-linecap: round;
 }
 
-.clock--hand-minute {
-	transform: rotate(60deg);
-}
-
-.clock--hand-hour {
-	transform: rotate(30deg);
-}
-
 .clock--hand-second {
 	stroke-width: 2;
-	transform: rotate(148deg);
 	stroke: #f02d2d;
 }
 
@@ -412,6 +407,14 @@ select {
 }
 
 @media (max-width: 780px) {
+	html {
+		height: auto;
+	}
+
+	body {
+		padding: 16px 0;
+	}
+
 	main {
 		grid-template-columns: 1fr;
 		gap: 8px;
@@ -434,10 +437,6 @@ select {
 }
 
 @media (max-width: 600px) {
-	body {
-		padding: 16px 0;
-	}
-
 	.timezone-button-group {
 		grid-template-columns: repeat(3, 1fr);
 	}
