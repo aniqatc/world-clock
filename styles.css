@@ -90,10 +90,6 @@ main {
 	justify-content: center;
 }
 
-section {
-	padding: 16px;
-}
-
 /* Option Buttons */
 .option-button-group {
 	display: flex;
@@ -376,7 +372,7 @@ select {
 	color: #efefef;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
 	main {
 		gap: 8px;
 	}
@@ -436,9 +432,10 @@ select {
 	}
 }
 
-@media (max-width: 600px) {
+@media (max-width: 660px) {
 	.timezone-button-group {
 		grid-template-columns: repeat(3, 1fr);
+		padding: 0 12px;
 	}
 
 	.timezone-button-group button p:first-of-type {
@@ -450,7 +447,7 @@ select {
 	}
 }
 
-@media (max-width: 375px) {
+@media (max-width: 420px) {
 	.option-button-group {
 		flex-wrap: wrap;
 	}
@@ -472,6 +469,11 @@ select {
 	}
 
 	.clock--analog {
-		min-width: 300px;
+		width: 100%;
+	}
+
+	.time-card--heading h1,
+	.time-card--heading h2 {
+		font-size: 18px;
 	}
 }
