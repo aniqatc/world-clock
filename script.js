@@ -9,11 +9,6 @@ toggleTzButton.addEventListener('click', function () {
 	}
 });
 
-/* Format Timezone Name */
-function formatTzName(tz, i) {
-	return tz.split('/')[i].replace('_', ' ');
-}
-
 /* Time Card */
 const timeCardHeading = document.querySelector('.time-card--heading h1');
 
@@ -35,20 +30,29 @@ const tzTimeDifference = document.getElementById('tz-difference');
 const tzOfficialName = document.getElementById('tz-official-name');
 const tzDayYear = document.getElementById('tz-day-year');
 
+let digitalClockInterval;
+let analogClockInterval;
+
 function updateTimeCard(tz) {
+	clearInterval(digitalClockInterval);
+
 	/* DIGITAL CLOCK */
 	timeCardHeading.innerHTML = `${formatTzName(tz, 1)}`;
 	digitalTime.innerHTML = `${moment.tz(tz).format('hh[:]mm')}`;
 	digitalSeconds.innerHTML = `${moment.tz(tz).format('[:]ss')}`;
 
-	setInterval(() => {
+	digitalClockInterval = setInterval(() => {
 		digitalTime.innerHTML = `${moment.tz(tz).format('hh[:]mm')}`;
 		digitalSeconds.innerHTML = `${moment.tz(tz).format('[:]ss')}`;
 	}, 1000);
 
 	if (moment.tz(tz).format('A') === 'AM') {
 		digitalAM.classList.add('active');
-	} else digitalPM.classList.add('active');
+		digitalPM.classList.remove('active');
+	} else {
+		digitalAM.classList.remove('active');
+		digitalPM.classList.add('active');
+	}
 
 	/* ADDITIONAL DATA/INFO SECTION */
 	dateInfoHeading.innerHTML = `${moment
@@ -65,6 +69,12 @@ function updateTimeCard(tz) {
 		MDT: 'MDT, Mountain Daylight Time',
 		PST: 'PST, Pacific Standard Time',
 		PDT: 'PDT, Pacific Daylight Time',
+		ACDT: 'ACDT, Australian Central Daylight Time',
+		EEST: 'EEST, Eastern European Summer Time',
+		CEST: 'CEST, Central European Summer Time',
+		AKDT: 'AKDT, Alaska Daylight Time',
+		GMT: 'GMT, Greenwich Mean Time',
+		ADT: 'ADT, Atlantic Daylight Time',
 	};
 
 	moment.fn.zoneName = function () {
@@ -77,6 +87,8 @@ function updateTimeCard(tz) {
 }
 
 function updateAnalogClock(tz) {
+	clearInterval(analogClockInterval);
+
 	let seconds = (moment.tz(tz).format('s') / 60) * 360;
 	let minutes = (moment.tz(tz).format('m') / 60) * 360;
 	let hours = moment.tz(tz).format('h') * 30;
@@ -85,9 +97,59 @@ function updateAnalogClock(tz) {
 	clockSecond.style.transform = `rotate(${seconds}deg)`;
 	clockMinute.style.transform = `rotate(${minutes}deg)`;
 	clockHour.style.transform = `rotate(${hours}deg)`;
+
+	analogClockInterval = setInterval(() => updateAnalogClock(tz), 1000);
 }
 
 updateTimeCard(moment.tz.guess());
 updateAnalogClock(moment.tz.guess());
 
-setInterval(() => updateAnalogClock(moment.tz.guess()), 1000);
+const allTz = moment.tz.names();
+// Remove any timezones that do not have a region defined
+const filteredTz = allTz.filter(
+	timezone =>
+		timezone.includes('/') && !timezone.includes('+') && !timezone.includes('-')
+);
+
+/* Get Random Index for Timezone */
+function getRandomTz(array) {
+	const randomIndex = Math.floor(Math.random() * array.length);
+	return array[randomIndex];
+}
+
+/* Format Timezone Name */
+function formatTzName(tz, i) {
+	return tz.split('/')[i].replace(/_/g, ' ');
+}
+
+/* Add Dropdown Selection */
+for (const timezone of filteredTz) {
+	const option = document.createElement('option');
+	option.value = timezone;
+	option.textContent = timezone;
+	tzDropdown.appendChild(option);
+}
+
+/* Store 30 Random Timezones */
+const uniqueTimezones = [];
+while (uniqueTimezones.length < 30) {
+	const randomTz = getRandomTz(filteredTz);
+	if (randomTz !== 'undefined') {
+		uniqueTimezones.push(randomTz);
+	}
+}
+
+/* Generate 30 Random Buttons */
+const timezoneButtonWrapper = document.querySelector('.timezone-button-group');
+
+for (const timezone of uniqueTimezones) {
+	const button = document.createElement('button');
+	button.innerHTML = `<p>${formatTzName(timezone, 1)}</p>
+						<p>${formatTzName(timezone, 0)}</p>`;
+	timezoneButtonWrapper.appendChild(button);
+
+	button.addEventListener('click', () => {
+		updateTimeCard(timezone);
+		updateAnalogClock(timezone);
+	});
+}
