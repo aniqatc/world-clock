@@ -56,7 +56,9 @@ ul {
 main {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
-	gap: 16px;
+	gap: 36px;
+	align-items: center;
+	justify-content: center;
 }
 
 section {
@@ -125,7 +127,13 @@ header {
 	background-color: #fff;
 	box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 4px;
-	padding: 24px 16px;
+	padding: 24px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
 }
 
 /* Clock SVG */
@@ -144,6 +152,10 @@ header {
 	font-size: 36px;
 	font-family: 'Cursed Timer ULiL', sans-serif;
 	fill: #fff;
+}
+
+.clock--digital-ms {
+	fill: #d98888;
 }
 
 .clock--am,
@@ -236,6 +248,26 @@ header {
 	fill: #fff;
 }
 
+/* Data Text */
+.tz-data-wrapper {
+	align-self: start;
+}
+
+.tz-data-wrapper h2 {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.tz-data-wrapper li {
+	font-size: 14px;
+	margin: 2px auto;
+	font-weight: 300;
+}
+
+.tz-data-wrapper li span {
+	font-weight: 500;
+}
+
 /* Timezone Buttons */
 .timezone-button-group {
 	display: grid;
@@ -244,11 +276,11 @@ header {
 }
 
 .timezone-button-group button p:first-of-type {
-	font-size: 22px;
+	font-size: 20px;
 }
 
 .timezone-button-group button p:last-of-type {
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .timezone-button-group button p {
@@ -256,7 +288,7 @@ header {
 }
 
 .timezone-button-group button {
-	padding: 24px 8px;
+	padding: 22px 8px;
 	border-radius: 4px;
 	background-color: transparent;
 
