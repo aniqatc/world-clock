@@ -9,6 +9,11 @@ toggleTzButton.addEventListener('click', function () {
 	}
 });
 
+tzDropdown.addEventListener('change', function (event) {
+	updateTimeCard(event.target.value);
+	updateAnalogClock(event.target.value);
+});
+
 /* Time Card */
 const timeCardHeading = document.querySelector('.time-card--heading h1');
 
@@ -75,6 +80,17 @@ function updateTimeCard(tz) {
 		AKDT: 'AKDT, Alaska Daylight Time',
 		GMT: 'GMT, Greenwich Mean Time',
 		ADT: 'ADT, Atlantic Daylight Time',
+		IDT: 'IDT, Israel Daylight Time',
+		MSK: 'MSK, Moscow Standard Time',
+		AWST: 'AWST, Australian Western Standard Time',
+		AST: 'AST, Atlantic Standard Time',
+		WAT: 'WAT, West African Time',
+		EAT: 'EAT, East African Time',
+		NDT: 'NDT, Newfoundland Time',
+		ACST: 'ACST, Australian Central Standard Time',
+		SST: 'SST, Samoa Standard Time',
+		HST: 'HST, Hawaii Standard Time',
+		SAST: 'SAST, South African Standard Time',
 	};
 
 	moment.fn.zoneName = function () {
@@ -153,3 +169,6 @@ for (const timezone of uniqueTimezones) {
 		updateAnalogClock(timezone);
 	});
 }
+
+const shuffleButton = document.getElementById('shuffle-tz-btn');
+shuffleButton.addEventListener('click', function () {});
