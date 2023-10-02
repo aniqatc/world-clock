@@ -88,6 +88,36 @@ header {
 	color: #000;
 	background-color: #efefef;
 	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+
+	transition: all 200ms ease-in;
+}
+
+.option-button-group button:hover {
+	background-color: #e3e3e3;
+	cursor: pointer;
+	animation: shake 800ms ease infinite;
+}
+
+.option-button-group button:active {
+	animation-play-state: paused;
+}
+
+@keyframes shake {
+	0% {
+		transform: translateY(0);
+	}
+	25% {
+		transform: translateY(-1px);
+	}
+	50% {
+		transform: translateY(1px);
+	}
+	75% {
+		transform: translateY(-1px);
+	}
+	100% {
+		transform: translateY(0);
+	}
 }
 
 /* Time Card */
@@ -98,13 +128,87 @@ header {
 	padding: 24px 16px;
 }
 
-svg text {
-	font-family: 'Anonymous Pro', monospace;
+/* Clock SVG */
+.clock {
+	min-width: 275px;
+}
+
+.clock--border {
+	fill: transparent;
+	stroke: #000;
+	stroke-width: 6;
+}
+
+.clock--ring-minutes {
+	fill: #fff;
+	stroke: #000;
+	stroke-width: 6;
+	stroke-dasharray: 0.05 0.95;
+	stroke-dashoffset: 0.025;
+}
+
+.clock--ring-hours {
+	stroke: rgba(64, 64, 64, 0.75);
+	stroke-width: 3;
+}
+
+.clock--text-hours {
+	font-family: 'DM Mono', monospace;
 	font-size: 20px;
 }
 
-svg line {
-	stroke: rgba(63, 63, 63, 0.75);
+.clock--center-ring {
+	fill: #fff;
+	stroke: #f02d2d;
+	stroke-width: 2;
+}
+
+.clock--hand {
+	stroke: #000;
+	stroke-width: 3;
+	stroke-linecap: round;
+}
+
+.clock--hand-minute {
+	transform: rotate(60deg);
+}
+
+.clock--hand-hour {
+	transform: rotate(30deg);
+}
+
+.clock--hand-second {
+	stroke-width: 2;
+	transform: rotate(148deg);
+	stroke: #f02d2d;
+}
+
+.clock--branding-title,
+.clock--branding-author {
+	font-family: 'DM Mono', monospace;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	fill: rgba(55, 55, 55, 0.75);
+}
+
+.clock--branding-title {
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.clock--branding-author {
+	font-size: 10px;
+}
+
+.clock--date-bg {
+	fill: #000;
+	width: 105px;
+	height: 24px;
+}
+
+.clock--date {
+	font-family: 'Anonymous Pro', monospace;
+	fill: #fff;
 }
 
 /* Timezone Buttons */
