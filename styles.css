@@ -93,7 +93,6 @@ section {
 .option-button-group {
 	display: flex;
 	gap: 14px;
-	margin-right: 48px;
 }
 
 .option-button-group button {
@@ -148,6 +147,29 @@ section {
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
+}
+
+.time-card--heading {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.time-card--heading h1,
+.time-card--heading h2 {
+	font-family: 'DM Mono', monospace;
+	font-size: 24px;
+}
+
+.time-card--heading h1 {
+	font-weight: 600;
+}
+
+.time-card--heading h2 {
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: rgba(64, 64, 64, 0.6);
 }
 
 /* Clock SVG */
@@ -267,7 +289,7 @@ section {
 	align-self: start;
 }
 
-.tz-data-wrapper h2 {
+.tz-data-wrapper h3 {
 	font-size: 18px;
 	font-weight: 500;
 }
