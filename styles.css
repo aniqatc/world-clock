@@ -11,11 +11,12 @@
 }
 
 body {
-	height: 100vh;
+	height: 100%;
 	background-color: #fcfcfc;
 	font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
 	max-width: 980px;
 	margin: 0 auto;
+	padding: 100px 0;
 
 	display: flex;
 	align-items: center;
@@ -86,7 +87,7 @@ main {
 }
 
 section {
-	margin: 16px auto;
+	padding: 16px;
 }
 
 /* Option Buttons */
@@ -376,4 +377,100 @@ select {
 
 .timezone-button-group button.active p {
 	color: #efefef;
+}
+
+@media (max-width: 1024px) {
+	main {
+		gap: 8px;
+	}
+
+	aside,
+	footer {
+		margin-right: 24px;
+	}
+
+	.timezone-button-group {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.timezone-button-group button:nth-child(29),
+	.timezone-button-group button:last-child {
+		display: none;
+	}
+}
+
+@media (max-width: 900px) {
+	.timezone-button-group {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.timezone-button-group button:nth-child(n + 19) {
+		display: none;
+	}
+}
+
+@media (max-width: 780px) {
+	main {
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+
+	aside,
+	footer {
+		margin: 24px auto;
+		align-self: center;
+		text-align: center;
+	}
+
+	.timezone-button-group {
+		grid-template-columns: repeat(5, 1fr);
+	}
+
+	.timezone-button-group button:nth-child(n + 19) {
+		display: block;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		padding: 16px 0;
+	}
+
+	.timezone-button-group {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.timezone-button-group button p:first-of-type {
+		font-size: 18px;
+	}
+
+	.timezone-button-group button {
+		padding: 16px 4px;
+	}
+}
+
+@media (max-width: 375px) {
+	.option-button-group {
+		flex-wrap: wrap;
+	}
+
+	.option-button-group button {
+		width: 100%;
+	}
+
+	.timezone-button-group button:nth-child(n + 19) {
+		display: none;
+	}
+
+	.timezone-button-group {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.timezone-button-group button p:first-of-type {
+		font-size: 16px;
+	}
+
+	.clock--analog {
+		min-width: 300px;
+	}
 }
