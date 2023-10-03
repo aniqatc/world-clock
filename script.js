@@ -32,9 +32,13 @@ let analogClockInterval;
 /* Button to Toggle Dropdown of All Timezones Options */
 const tzDropdown = document.getElementById('tz-dropdown');
 const toggleTzButton = document.getElementById('list-tz-btn');
+const userTzButton = document.getElementById('user-tz-btn');
 
 /* Button to Generate 30 New Timezones */
 const shuffleButton = document.getElementById('shuffle-tz-btn');
+
+/* Timezone Button Wrapper That Will Hold All 30 New Buttons */
+const timezoneButtonWrapper = document.querySelector('.timezone-button-group');
 
 /*************************
  Main Functionality
@@ -69,6 +73,15 @@ toggleTzButton.addEventListener('click', function () {
 /* Shuffle button that generates 30 new timezones */
 shuffleButton.addEventListener('click', generateRandomTzButtons);
 
+/* Reset back to user's timezone */
+userTzButton.addEventListener('click', function () {
+	updateTimeCard(moment.tz.guess());
+	updateAnalogClock(moment.tz.guess());
+
+	newlyGeneratedBtns = timezoneButtonWrapper.querySelectorAll('button');
+	newlyGeneratedBtns.forEach(el => el.classList.remove('active'));
+});
+
 /* Get all timezones into an array */
 // Remove any timezones that do not have a region defined (e.g. GMT+100 should not be included)
 const filteredTz = moment.tz
@@ -101,9 +114,6 @@ for (const timezone of filteredTz) {
 
 /* Generate 30 random buttons that represent 30 different timezones */
 function generateRandomTzButtons() {
-	const timezoneButtonWrapper = document.querySelector(
-		'.timezone-button-group'
-	);
 	/* Clear it everytime new buttons need to be generated */
 	timezoneButtonWrapper.innerHTML = '';
 
