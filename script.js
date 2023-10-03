@@ -134,8 +134,14 @@ function generateRandomTzButtons() {
 	/* For each unique timezone, a button is generated */
 	for (const timezone of uniqueTimezones) {
 		const button = document.createElement('button');
-		button.innerHTML = `<p>${formatTzName(timezone, 1)}</p>
-						<p>${formatTzName(timezone, 0)}</p>`;
+		function addButtonContent() {
+			button.innerHTML = `
+		<p>${formatTzName(timezone, 1)}</p><p>${formatTzName(timezone, 0)}</p>
+		<span>${moment.tz(timezone).format('h[:]mm[:]ss A')}</span>
+		`;
+		}
+		addButtonContent();
+		setInterval(addButtonContent, 1000);
 		timezoneButtonWrapper.appendChild(button);
 
 		/* Button functionality to update Time Card content + add/remove active class */

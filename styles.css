@@ -65,6 +65,7 @@ footer {
 footer {
 	color: #747474;
 	font-size: 12px;
+	margin-top: 12px;
 }
 
 a {
@@ -364,7 +365,7 @@ select {
 }
 
 .timezone-button-group button {
-	padding: 22px 8px;
+	padding: 18px 8px 12px;
 	border-radius: 4px;
 	background-color: transparent;
 
@@ -389,8 +390,13 @@ select {
 	color: #efefef;
 }
 
+.timezone-button-group button.active span {
+	color: #cecece;
+	visibility: visible;
+}
+
 .timezone-button-group button p:first-of-type {
-	font-size: 20px;
+	font-size: 18px;
 }
 
 .timezone-button-group button p:last-of-type {
@@ -399,6 +405,17 @@ select {
 
 .timezone-button-group button p {
 	color: rgba(64, 64, 64, 0.75);
+}
+
+.timezone-button-group span {
+	font-size: 12px;
+	font-weight: 600;
+	visibility: hidden;
+	transition: all 200ms ease-in;
+}
+
+.timezone-button-group button:hover span {
+	visibility: visible;
 }
 
 /****************************/
@@ -425,14 +442,13 @@ select {
 		grid-template-columns: repeat(4, 1fr);
 	}
 
-	.timezone-button-group button:nth-child(29),
-	.timezone-button-group button:last-child {
+	.timezone-button-group button:nth-child(n + 29) {
 		display: none;
 	}
 }
 
-/* 900px */
-@media (max-width: 900px) {
+/* 950px */
+@media (max-width: 930px) {
 	/* Timezone Buttons */
 	.timezone-button-group {
 		grid-template-columns: repeat(3, 1fr);
@@ -444,7 +460,7 @@ select {
 }
 
 /* 880px */
-@media (max-width: 880px) {
+@media (max-width: 820px) {
 	/* General */
 	html {
 		height: auto;
@@ -471,7 +487,7 @@ select {
 		grid-template-columns: repeat(4, 1fr);
 	}
 
-	.timezone-button-group button:nth-child(n + 19) {
+	.timezone-button-group button:nth-child(n + 21) {
 		display: block;
 	}
 }
@@ -484,8 +500,8 @@ select {
 		padding: 0 12px;
 	}
 
-	.timezone-button-group button p:first-of-type {
-		font-size: 18px;
+	.timezone-button-group button:nth-child(n + 19) {
+		display: block;
 	}
 
 	.timezone-button-group button {
