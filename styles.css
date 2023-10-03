@@ -1,4 +1,4 @@
-/**************/
+/******************************/
 /* CSS Reset & General Styling */
 *,
 *::before,
@@ -82,6 +82,7 @@ ul {
 	list-style-type: none;
 }
 
+/******************************/
 /* Main Container Layout */
 main {
 	display: grid;
@@ -91,6 +92,7 @@ main {
 	justify-content: center;
 }
 
+/******************************/
 /* Option Buttons: Shuffle & List Toggle */
 .option-button-group {
 	display: flex;
@@ -137,6 +139,7 @@ main {
 	}
 }
 
+/******************************/
 /* Timezone Dropdown */
 select::-ms-expand {
 	display: none;
@@ -168,7 +171,8 @@ select {
 	display: none;
 }
 
-/* Time Card */
+/******************************/
+/* Main Time Card */
 .time-card-wrapper {
 	background-color: #fff;
 	box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
@@ -183,9 +187,10 @@ select {
 }
 
 .time-card--heading {
+	width: 100%;
+
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
 }
 
 .time-card--heading h1,
@@ -205,12 +210,8 @@ select {
 	color: rgba(64, 64, 64, 0.6);
 }
 
-/* Clock SVG */
-.clock--analog {
-	min-width: 350px;
-	height: 350px;
-}
-
+/******************************/
+/* Clock SVG: Digital Clock */
 .clock--digital-bg {
 	fill: #252525;
 }
@@ -235,6 +236,13 @@ select {
 .clock--am.active,
 .clock--pm.active {
 	fill: #fff;
+}
+
+/******************************/
+/* Clock SVG: Analog Clock */
+.clock--analog {
+	min-width: 350px;
+	height: 350px;
 }
 
 .clock--border {
@@ -278,6 +286,8 @@ select {
 	stroke: #f02d2d;
 }
 
+/*****************************/
+/* Clock SVG: Analog Clock Title & Date */
 .clock--branding-title,
 .clock--branding-author {
 	font-family: 'DM Mono', monospace;
@@ -304,6 +314,7 @@ select {
 	fill: #fff;
 }
 
+/*****************************/
 /* Data Text Inside Time Card */
 .tz-data-wrapper {
 	align-self: start;
@@ -342,23 +353,12 @@ select {
 	color: #000;
 }
 
+/*****************************/
 /* Timezone Buttons */
 .timezone-button-group {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	gap: 4px;
-}
-
-.timezone-button-group button p:first-of-type {
-	font-size: 20px;
-}
-
-.timezone-button-group button p:last-of-type {
-	font-size: 12px;
-}
-
-.timezone-button-group button p {
-	color: rgba(64, 64, 64, 0.75);
 }
 
 .timezone-button-group button {
@@ -387,11 +387,22 @@ select {
 	color: #efefef;
 }
 
-@media (max-width: 1150px) {
-	button {
-		white-space: normal;
-	}
+.timezone-button-group button p:first-of-type {
+	font-size: 20px;
+}
 
+.timezone-button-group button p:last-of-type {
+	font-size: 12px;
+}
+
+.timezone-button-group button p {
+	color: rgba(64, 64, 64, 0.75);
+}
+
+/****************************/
+/* MEDIA QUERIES */
+@media (max-width: 1150px) {
+	/* General */
 	main {
 		gap: 8px;
 	}
@@ -401,6 +412,11 @@ select {
 		margin-right: 24px;
 	}
 
+	button {
+		white-space: normal;
+	}
+
+	/* Timezone Buttons */
 	.timezone-button-group {
 		grid-template-columns: repeat(4, 1fr);
 	}
@@ -412,6 +428,7 @@ select {
 }
 
 @media (max-width: 900px) {
+	/* Timezone Buttons */
 	.timezone-button-group {
 		grid-template-columns: repeat(3, 1fr);
 	}
@@ -422,6 +439,7 @@ select {
 }
 
 @media (max-width: 880px) {
+	/* General */
 	html {
 		height: auto;
 	}
@@ -442,6 +460,7 @@ select {
 		text-align: center;
 	}
 
+	/* Timezone Buttons */
 	.timezone-button-group {
 		grid-template-columns: repeat(4, 1fr);
 	}
@@ -452,6 +471,7 @@ select {
 }
 
 @media (max-width: 660px) {
+	/* Timezone Buttons */
 	.timezone-button-group {
 		grid-template-columns: repeat(3, 1fr);
 		padding: 0 12px;
@@ -467,6 +487,7 @@ select {
 }
 
 @media (max-width: 420px) {
+	/* Option Buttons: Shuffle/List */
 	.option-button-group {
 		flex-wrap: wrap;
 	}
@@ -475,22 +496,12 @@ select {
 		width: 100%;
 	}
 
-	.timezone-button-group button:nth-child(n + 19) {
-		display: none;
-	}
-
-	.timezone-button-group {
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	.timezone-button-group button p:first-of-type {
-		font-size: 16px;
-	}
-
+	/* Clock SVG */
 	.clock--analog {
 		width: 100%;
 	}
 
+	/* Time Card */
 	.time-card--heading {
 		flex-wrap: wrap-reverse;
 		gap: 4px;
@@ -501,5 +512,18 @@ select {
 	.time-card--heading h2 {
 		width: 100%;
 		text-align: center;
+	}
+
+	/* Timezone Buttons */
+	.timezone-button-group button:nth-child(n + 19) {
+		display: none;
+	}
+
+	.timezone-button-group {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.timezone-button-group button p:first-of-type {
+		font-size: 16px;
 	}
 }
