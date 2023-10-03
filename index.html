@@ -37,7 +37,6 @@
 		<!-- Page title to appear on browser window -->
 		<title>World Clock</title>
 
-		<!------------------------------>
 		<!-- Links to CSS styling, custom/web fonts, favicon, icons, frameworks -->
 		<link href="styles.css" rel="stylesheet" />
 		<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
@@ -75,12 +74,18 @@
 		<main>
 			<section class="time-card-wrapper">
 				<div class="time-card--heading">
-					<h1></h1>
+					<h1>Your Location</h1>
 					<h2>Time Card</h2>
 				</div>
 				<div class="clock-wrapper">
 					<svg class="clock--analog" viewBox="-130 -130 260 350">
-						<rect class="clock--digital-bg" x="-130" y="0" />
+						<rect
+							class="clock--digital-bg"
+							height="210"
+							width="260"
+							x="-130"
+							y="0"
+						/>
 						<circle class="clock--ring-minutes" r="120" pathlength="60" />
 						<circle class="clock--border" cx="0" cy="0" r="125" />
 						<text class="clock--text-hours" x="0" y="-95" text-anchor="middle">
@@ -171,7 +176,14 @@
 							World Clock
 						</text>
 						<text class="clock--branding-author" x="-28" y="-45">By Aniqa</text>
-						<rect class="clock--date-bg" rx="6" x="-50" y="40" />
+						<rect
+							class="clock--date-bg"
+							height="24"
+							width="105"
+							rx="6"
+							x="-50"
+							y="40"
+						/>
 						<text class="clock--date" x="-40" y="57"></text>
 						<line
 							class="clock--hand-minute clock--hand"
@@ -206,7 +218,7 @@
 					</svg>
 				</div>
 				<div class="tz-data-wrapper">
-					<h3></h3>
+					<h3>Current Date</h3>
 					<ul>
 						<li>Region: <span id="tz-region"></span></li>
 						<li id="tz-official-name"></li>
@@ -216,9 +228,9 @@
 					<p id="tz-google"></p>
 				</div>
 			</section>
-			<section class="timezone-wrapper">
+			<div class="timezone-wrapper">
 				<div class="timezone-button-group"></div>
-			</section>
+			</div>
 		</main>
 		<footer>
 			Coded by

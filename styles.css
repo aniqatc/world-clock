@@ -211,8 +211,6 @@ select {
 }
 
 .clock--digital-bg {
-	height: 210px;
-	width: 260px;
 	fill: #252525;
 }
 
@@ -298,8 +296,6 @@ select {
 
 .clock--date-bg {
 	fill: #000;
-	width: 105px;
-	height: 24px;
 }
 
 .clock--date {
