@@ -31,7 +31,7 @@ const digitalPM = document.querySelector('.clock--pm');
 
 /* Card Info Section */
 const dateInfoHeading = document.querySelector('.tz-data-wrapper h3');
-const tzTimeDifference = document.getElementById('tz-difference');
+const tzDaylightSavings = document.getElementById('tz-daylight');
 const tzOfficialName = document.getElementById('tz-official-name');
 const tzDayYear = document.getElementById('tz-day-year');
 const tzRegion = document.getElementById('tz-region');
@@ -103,6 +103,7 @@ function updateTimeCard(tz) {
 		NZDT: 'NZDT, New Zealand Daylight Time',
 		WIB: 'WIB, Western Indonesian Time',
 		EET: 'EET, Eastern European Time',
+		PKT: 'PKT, Pakistan Standard Time',
 	};
 
 	moment.fn.zoneName = function () {
@@ -127,7 +128,7 @@ function updateTimeCard(tz) {
 							rel="noopener noreferrer"
 							>Search on <i class="fa-brands fa-google"></i> about ${formatTzName(tz, 1)}</a
 						>`;
-	tzTimeDifference.innerHTML = 'Not yet...';
+	tzDaylightSavings.innerHTML = `${moment.tz(tz).isDST()}`;
 }
 
 function updateAnalogClock(tz) {

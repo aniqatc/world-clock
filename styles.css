@@ -326,6 +326,7 @@ select {
 
 .tz-data-wrapper li span {
 	font-weight: 500;
+	text-transform: capitalize;
 }
 
 .tz-data-wrapper p {
@@ -389,7 +390,11 @@ select {
 	color: #efefef;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1150px) {
+	button {
+		white-space: normal;
+	}
+
 	main {
 		gap: 8px;
 	}
@@ -441,7 +446,7 @@ select {
 	}
 
 	.timezone-button-group {
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 
 	.timezone-button-group button:nth-child(n + 19) {
