@@ -1,4 +1,5 @@
-/* CSS Reset */
+/**************/
+/* CSS Reset & General Styling */
 *,
 *::before,
 *::after {
@@ -90,7 +91,7 @@ main {
 	justify-content: center;
 }
 
-/* Option Buttons */
+/* Option Buttons: Shuffle & List Toggle */
 .option-button-group {
 	display: flex;
 	gap: 14px;

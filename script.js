@@ -208,6 +208,10 @@ function generateRandomTzButtons() {
 		timezoneButtonWrapper.appendChild(button);
 
 		button.addEventListener('click', () => {
+			newlyGeneratedBtns = timezoneButtonWrapper.querySelectorAll('button');
+			newlyGeneratedBtns.forEach(el => el.classList.remove('active'));
+
+			button.classList.add('active');
 			updateTimeCard(timezone);
 			updateAnalogClock(timezone);
 		});
