@@ -250,15 +250,12 @@ function updateTimeCard(tz) {
 	tzRegion.innerHTML = `${formatTzName(tz, 0)}`;
 
 	/* Link to search more about the selected location on Google */
-	tzGoogle.innerHTML = `<a
-							href="https://www.google.com/search?q=${formatTzName(tz, 1)}, ${formatTzName(
-		tz,
-		0
-	)}"
-							target="_blank"
-							rel="noopener noreferrer"
-							>Search on <i class="fa-brands fa-google"></i> about ${formatTzName(tz, 1)}</a
-						>`;
+	tzGoogle.innerHTML = `<a href="https://www.google.com/search?q=
+		${formatTzName(tz, 1)}, ${formatTzName(tz, 0)}"
+		target="_blank"
+		rel="noopener noreferrer"
+		>Search on <i class="fa-brands fa-google"></i> 
+		about ${formatTzName(tz, 1)}</a>`;
 
 	/* Prints whether or not that location is currently in daylight savings */
 	if (moment.tz(tz).isDST() === true) {
