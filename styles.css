@@ -90,6 +90,8 @@ main {
 	gap: 36px;
 	align-items: center;
 	justify-content: center;
+
+	margin-top: 16px;
 }
 
 /******************************/
@@ -401,10 +403,12 @@ select {
 
 /****************************/
 /* MEDIA QUERIES */
+
+/* 1150px */
 @media (max-width: 1150px) {
 	/* General */
 	main {
-		gap: 8px;
+		gap: 16px;
 	}
 
 	aside,
@@ -427,6 +431,7 @@ select {
 	}
 }
 
+/* 900px */
 @media (max-width: 900px) {
 	/* Timezone Buttons */
 	.timezone-button-group {
@@ -438,6 +443,7 @@ select {
 	}
 }
 
+/* 880px */
 @media (max-width: 880px) {
 	/* General */
 	html {
@@ -470,6 +476,7 @@ select {
 	}
 }
 
+/* 660px */
 @media (max-width: 660px) {
 	/* Timezone Buttons */
 	.timezone-button-group {
@@ -486,6 +493,7 @@ select {
 	}
 }
 
+/* 420px */
 @media (max-width: 420px) {
 	/* Option Buttons: Shuffle/List */
 	.option-button-group {
