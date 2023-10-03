@@ -306,3 +306,6 @@ function updateAnalogClock(tz) {
 
 	analogClockInterval = setInterval(() => updateAnalogClock(tz), 1000);
 }
+
+// TEMP: Ensure page loads at the top
+document.querySelector('aside').scrollIntoView({ behavior: 'smooth' });
