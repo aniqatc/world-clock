@@ -91,6 +91,9 @@ function updateTimeCard(tz) {
 		SST: 'SST, Samoa Standard Time',
 		HST: 'HST, Hawaii Standard Time',
 		SAST: 'SAST, South African Standard Time',
+		CAT: 'CAT, Central Africa Time',
+		BST: 'BST, British Summer Time',
+		AEDT: 'AEDT, Australian Eastern Daylight Time',
 	};
 
 	moment.fn.zoneName = function () {
@@ -98,7 +101,16 @@ function updateTimeCard(tz) {
 		return abbrs[abbr] || abbr;
 	};
 
-	tzOfficialName.innerHTML = `${moment.tz(tz).format('zz')}`;
+	if (
+		moment.tz(tz).format('zz').includes('+') ||
+		moment.tz(tz).format('zz').includes('-')
+	) {
+		tzOfficialName.innerHTML = `
+        Time Offset: <span> ${moment.tz(tz).format('zz')}</span>`;
+	} else {
+		tzOfficialName.innerHTML = `
+        Timezone: <span> ${moment.tz(tz).format('zz')}</span>`;
+	}
 	tzTimeDifference.innerHTML = 'Not yet...';
 }
 

@@ -402,7 +402,7 @@ select {
 	}
 }
 
-@media (max-width: 780px) {
+@media (max-width: 880px) {
 	html {
 		height: auto;
 	}
@@ -472,8 +472,15 @@ select {
 		width: 100%;
 	}
 
+	.time-card--heading {
+		flex-wrap: wrap-reverse;
+		gap: 4px;
+		margin-bottom: 6px;
+	}
+
 	.time-card--heading h1,
 	.time-card--heading h2 {
-		font-size: 18px;
+		width: 100%;
+		text-align: center;
 	}
 }
