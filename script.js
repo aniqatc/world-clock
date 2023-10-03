@@ -142,8 +142,13 @@ function generateRandomTzButtons() {
 			button.classList.add('active');
 			updateTimeCard(timezone);
 			updateAnalogClock(timezone);
+
+			document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
 		});
 	}
+	document
+		.querySelector('.timezone-wrapper')
+		.scrollIntoView({ behavior: 'smooth' });
 }
 
 /* Generate 30 random timezones by default */
