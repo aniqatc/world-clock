@@ -34,11 +34,14 @@ const dateInfoHeading = document.querySelector('.tz-data-wrapper h3');
 const tzTimeDifference = document.getElementById('tz-difference');
 const tzOfficialName = document.getElementById('tz-official-name');
 const tzDayYear = document.getElementById('tz-day-year');
+const tzRegion = document.getElementById('tz-region');
+const tzGoogle = document.getElementById('tz-google');
 
 let digitalClockInterval;
 let analogClockInterval;
 
 function updateTimeCard(tz) {
+	localStorage.setItem('location', tz);
 	clearInterval(digitalClockInterval);
 
 	/* DIGITAL CLOCK */
@@ -94,6 +97,12 @@ function updateTimeCard(tz) {
 		CAT: 'CAT, Central Africa Time',
 		BST: 'BST, British Summer Time',
 		AEDT: 'AEDT, Australian Eastern Daylight Time',
+		HDT: 'HDT, Hawaii–Aleutian Daylight Time',
+		WEST: 'WEST, Western European Summer Time',
+		AEST: 'AEST, Australian Eastern Standard Time',
+		NZDT: 'NZDT, New Zealand Daylight Time',
+		WIB: 'WIB, Western Indonesian Time',
+		EET: 'EET, Eastern European Time',
 	};
 
 	moment.fn.zoneName = function () {
@@ -111,6 +120,13 @@ function updateTimeCard(tz) {
 		tzOfficialName.innerHTML = `
         Timezone: <span> ${moment.tz(tz).format('zz')}</span>`;
 	}
+	tzRegion.innerHTML = `${formatTzName(tz, 0)}`;
+	tzGoogle.innerHTML = `<a
+							href="https://www.google.com/search?q=${formatTzName(tz, 1)}"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Search on <i class="fa-brands fa-google"></i> about ${formatTzName(tz, 1)}</a
+						>`;
 	tzTimeDifference.innerHTML = 'Not yet...';
 }
 
@@ -129,8 +145,14 @@ function updateAnalogClock(tz) {
 	analogClockInterval = setInterval(() => updateAnalogClock(tz), 1000);
 }
 
-updateTimeCard(moment.tz.guess());
-updateAnalogClock(moment.tz.guess());
+const savedLocation = localStorage.getItem('location');
+if (savedLocation) {
+	updateTimeCard(savedLocation);
+	updateAnalogClock(savedLocation);
+} else {
+	updateTimeCard(moment.tz.guess());
+	updateAnalogClock(moment.tz.guess());
+}
 
 const allTz = moment.tz.names();
 // Remove any timezones that do not have a region defined
@@ -158,7 +180,13 @@ for (const timezone of filteredTz) {
 	tzDropdown.appendChild(option);
 }
 
+/* Generate 30 Random Buttons */
 function generateRandomTzButtons() {
+	const timezoneButtonWrapper = document.querySelector(
+		'.timezone-button-group'
+	);
+	timezoneButtonWrapper.innerHTML = '';
+
 	const uniqueTimezones = [];
 	while (uniqueTimezones.length < 30) {
 		const randomTz = getRandomTz(filteredTz);
@@ -166,12 +194,6 @@ function generateRandomTzButtons() {
 			uniqueTimezones.push(randomTz);
 		}
 	}
-
-	/* Generate 30 Random Buttons */
-	const timezoneButtonWrapper = document.querySelector(
-		'.timezone-button-group'
-	);
-	timezoneButtonWrapper.innerHTML = '';
 
 	for (const timezone of uniqueTimezones) {
 		const button = document.createElement('button');

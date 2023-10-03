@@ -310,6 +310,7 @@ select {
 /* Data Text Inside Time Card */
 .tz-data-wrapper {
 	align-self: start;
+	width: 100%;
 }
 
 .tz-data-wrapper h3 {
@@ -325,6 +326,22 @@ select {
 
 .tz-data-wrapper li span {
 	font-weight: 500;
+}
+
+.tz-data-wrapper p {
+	margin-top: 8px;
+	font-size: 12px;
+
+	text-align: end;
+}
+
+.tz-data-wrapper a {
+	color: rgba(18, 18, 18, 0.6);
+	transition: all 200ms ease-in;
+}
+
+.tz-data-wrapper a:hover {
+	color: #000;
 }
 
 /* Timezone Buttons */
