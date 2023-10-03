@@ -19,9 +19,9 @@ body {
 	height: 100%;
 	background-color: #fcfcfc;
 	font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-	max-width: 980px;
 	margin: 0 auto;
 	padding: 100px 0;
+	max-width: 1024px;
 
 	display: flex;
 	align-items: center;

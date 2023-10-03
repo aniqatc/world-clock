@@ -78,7 +78,7 @@ userTzButton.addEventListener('click', function () {
 	updateTimeCard(moment.tz.guess());
 	updateAnalogClock(moment.tz.guess());
 
-	newlyGeneratedBtns = timezoneButtonWrapper.querySelectorAll('button');
+	const newlyGeneratedBtns = timezoneButtonWrapper.querySelectorAll('button');
 	newlyGeneratedBtns.forEach(el => el.classList.remove('active'));
 });
 
@@ -135,7 +135,8 @@ function generateRandomTzButtons() {
 
 		/* Button functionality to update Time Card content + add/remove active class */
 		button.addEventListener('click', () => {
-			newlyGeneratedBtns = timezoneButtonWrapper.querySelectorAll('button');
+			const newlyGeneratedBtns =
+				timezoneButtonWrapper.querySelectorAll('button');
 			newlyGeneratedBtns.forEach(el => el.classList.remove('active'));
 
 			button.classList.add('active');
