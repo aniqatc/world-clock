@@ -158,29 +158,35 @@ for (const timezone of filteredTz) {
 	tzDropdown.appendChild(option);
 }
 
-/* Store 30 Random Timezones */
-const uniqueTimezones = [];
-while (uniqueTimezones.length < 30) {
-	const randomTz = getRandomTz(filteredTz);
-	if (randomTz !== 'undefined') {
-		uniqueTimezones.push(randomTz);
+function generateRandomTzButtons() {
+	const uniqueTimezones = [];
+	while (uniqueTimezones.length < 30) {
+		const randomTz = getRandomTz(filteredTz);
+		if (randomTz !== 'undefined') {
+			uniqueTimezones.push(randomTz);
+		}
+	}
+
+	/* Generate 30 Random Buttons */
+	const timezoneButtonWrapper = document.querySelector(
+		'.timezone-button-group'
+	);
+	timezoneButtonWrapper.innerHTML = '';
+
+	for (const timezone of uniqueTimezones) {
+		const button = document.createElement('button');
+		button.innerHTML = `<p>${formatTzName(timezone, 1)}</p>
+						<p>${formatTzName(timezone, 0)}</p>`;
+		timezoneButtonWrapper.appendChild(button);
+
+		button.addEventListener('click', () => {
+			updateTimeCard(timezone);
+			updateAnalogClock(timezone);
+		});
 	}
 }
 
-/* Generate 30 Random Buttons */
-const timezoneButtonWrapper = document.querySelector('.timezone-button-group');
-
-for (const timezone of uniqueTimezones) {
-	const button = document.createElement('button');
-	button.innerHTML = `<p>${formatTzName(timezone, 1)}</p>
-						<p>${formatTzName(timezone, 0)}</p>`;
-	timezoneButtonWrapper.appendChild(button);
-
-	button.addEventListener('click', () => {
-		updateTimeCard(timezone);
-		updateAnalogClock(timezone);
-	});
-}
+generateRandomTzButtons();
 
 const shuffleButton = document.getElementById('shuffle-tz-btn');
-shuffleButton.addEventListener('click', function () {});
+shuffleButton.addEventListener('click', generateRandomTzButtons);
