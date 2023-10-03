@@ -71,7 +71,12 @@ toggleTzButton.addEventListener('click', function () {
 });
 
 /* Shuffle button that generates 30 new timezones */
-shuffleButton.addEventListener('click', generateRandomTzButtons);
+shuffleButton.addEventListener('click', function () {
+	document
+		.querySelector('.timezone-wrapper')
+		.scrollIntoView({ behavior: 'smooth' });
+	generateRandomTzButtons();
+});
 
 /* Reset back to user's timezone */
 userTzButton.addEventListener('click', function () {
@@ -146,9 +151,6 @@ function generateRandomTzButtons() {
 			document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
 		});
 	}
-	document
-		.querySelector('.timezone-wrapper')
-		.scrollIntoView({ behavior: 'smooth' });
 }
 
 /* Generate 30 random timezones by default */
@@ -306,6 +308,3 @@ function updateAnalogClock(tz) {
 
 	analogClockInterval = setInterval(() => updateAnalogClock(tz), 1000);
 }
-
-// TEMP: Ensure page loads at the top
-document.querySelector('aside').scrollIntoView({ behavior: 'smooth' });
