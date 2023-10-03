@@ -319,7 +319,6 @@ select {
 /*****************************/
 /* Data Text Inside Time Card */
 .tz-data-wrapper {
-	align-self: start;
 	width: 100%;
 }
 
@@ -495,18 +494,19 @@ select {
 
 /* 420px */
 @media (max-width: 420px) {
+	aside {
+		padding: 0 10px;
+		width: 100%;
+	}
+
 	/* Option Buttons: Shuffle/List */
 	.option-button-group {
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: 1fr;
 	}
 
-	.option-button-group button {
-		width: 100%;
-	}
-
-	/* Clock SVG */
-	.clock--analog {
-		width: 100%;
+	.option-button-group button:first-of-type {
+		grid-column: span 2;
 	}
 
 	/* Time Card */
@@ -522,7 +522,16 @@ select {
 		text-align: center;
 	}
 
+	.tz-data-wrapper,
+	.tz-data-wrapper p {
+		text-align: center;
+	}
+
 	/* Timezone Buttons */
+	.timezone-wrapper {
+		margin: 0 20px;
+	}
+
 	.timezone-button-group button:nth-child(n + 19) {
 		display: none;
 	}
@@ -533,5 +542,11 @@ select {
 
 	.timezone-button-group button p:first-of-type {
 		font-size: 16px;
+	}
+}
+
+@media (max-width: 350px) {
+	.time-card-wrapper {
+		padding: 12px 2px;
 	}
 }
