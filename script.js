@@ -128,7 +128,12 @@ function updateTimeCard(tz) {
 							rel="noopener noreferrer"
 							>Search on <i class="fa-brands fa-google"></i> about ${formatTzName(tz, 1)}</a
 						>`;
-	tzDaylightSavings.innerHTML = `${moment.tz(tz).isDST()}`;
+
+	if (moment.tz(tz).isDST() === true) {
+		tzDaylightSavings.innerHTML = `Active`;
+	} else {
+		tzDaylightSavings.innerHTML = 'Inactive';
+	}
 }
 
 function updateAnalogClock(tz) {
