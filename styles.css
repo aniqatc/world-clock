@@ -566,4 +566,8 @@ select {
 	.time-card-wrapper {
 		padding: 12px 2px;
 	}
+
+	.clock--analog {
+		min-width: revert;
+	}
 }
