@@ -511,6 +511,10 @@ select {
 
 /* 420px */
 @media (max-width: 420px) {
+	main {
+		width: 100%;
+	}
+
 	aside {
 		padding: 0 10px;
 		width: 100%;
@@ -527,6 +531,10 @@ select {
 	}
 
 	/* Time Card */
+	.clock--analog {
+		min-width: revert;
+	}
+
 	.time-card--heading {
 		flex-wrap: wrap-reverse;
 		gap: 4px;
@@ -559,15 +567,5 @@ select {
 
 	.timezone-button-group button p:first-of-type {
 		font-size: 16px;
-	}
-}
-
-@media (max-width: 350px) {
-	.time-card-wrapper {
-		padding: 12px 2px;
-	}
-
-	.clock--analog {
-		min-width: revert;
 	}
 }
