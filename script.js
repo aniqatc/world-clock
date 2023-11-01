@@ -40,6 +40,69 @@ const shuffleButton = document.getElementById('shuffle-tz-btn');
 /* Timezone Button Wrapper That Will Hold All 30 New Buttons */
 const timezoneButtonWrapper = document.querySelector('.timezone-button-group');
 
+/* Popular Timezone Names */
+const abbrs = {
+	ACDT: 'ACDT, Australian Central Daylight Time',
+	ACST: 'ACST, Australian Central Standard Time',
+	ADT: 'ADT, Atlantic Daylight Time',
+	AEDT: 'AEDT, Australian Eastern Daylight Time',
+	AEST: 'AEST, Australian Eastern Standard Time',
+	AKDT: 'AKDT, Alaska Daylight Time',
+	AST: 'AST, Atlantic Standard Time',
+	AWST: 'AWST, Australian Western Standard Time',
+	BST: 'BST, British Summer Time',
+	CAT: 'CAT, Central Africa Time',
+	CDT: 'CDT, Central Daylight Time',
+	CET: 'CET, Central European Time',
+	CEST: 'CEST, Central European Summer Time',
+	ChST: 'CHST, Chamorro Standard Time',
+	CST: 'CST, Central Standard Time',
+	EAT: 'EAT, East Africa Time',
+	EAST: 'EAST, Eastern European Summer Time',
+	EDT: 'EDT, Eastern Daylight Time',
+	EEST: 'EEST, Eastern European Summer Time',
+	EET: 'EET, Eastern European Time',
+	EST: 'EST, Eastern Standard Time',
+	GET: 'GET, Georgia Standard Time',
+	GMT: 'GMT, Greenwich Mean Time',
+	GST: 'GST, Gulf Standard Time',
+	HDT: 'HDT, Hawaii–Aleutian Daylight Time',
+	HST: 'HST, Hawaii Standard Time',
+	IDT: 'IDT, Israel Daylight Time',
+	IRST: 'IRST, Iran Standard Time',
+	IST: 'IST, Indian Standard Time',
+	JST: 'JST, Japan Standard Time',
+	KST: 'KST, Korean Standard Time',
+	LHDT: 'LHDT, Lord Howe Daylight Time',
+	LHST: 'LHST, Lord Howe Standard Time',
+	MSK: 'MSK, Moscow Standard Time',
+	MST: 'MST, Mountain Standard Time',
+	MSK: 'MSK, Moscow Standard Time',
+	MT: 'MT, Mountain Time',
+	MDT: 'MDT, Mountain Daylight Time',
+	MUT: 'MUT, Mauritius Time',
+	MYT: 'MYT, Malaysia Time',
+	NDT: 'NDT, Newfoundland Time',
+	NPT: 'NPT, Nepal Time',
+	NST: 'NST, North Sumatra Time',
+	NZDT: 'NZDT, New Zealand Daylight Time',
+	PDT: 'PDT, Pacific Daylight Time',
+	PKT: 'PKT, Pakistan Standard Time',
+	PST: 'PST, Pacific Standard Time',
+	SAST: 'SAST, South African Standard Time',
+	SST: 'SST, Samoa Standard Time',
+	RET: 'RET, Reunion Time',
+	SCT: 'SCT, Seychelles Time',
+	SLST: 'SLST, Sri Lanka Standard Time',
+	SGT: 'SGT, Singapore Time',
+	TRT: 'TRT, Turkey Time',
+	VET: 'VET, Venezuela Standard Time',
+	WAT: 'WAT, West African Time',
+	WEST: 'WEST, Western European Summer Time',
+	WET: 'WET, Western European Time',
+	WIB: 'WIB, Western Indonesian Time',
+};
+
 /*************************
  Main Functionality
 *************************/
@@ -137,7 +200,7 @@ function generateRandomTzButtons() {
 		function addButtonContent() {
 			button.innerHTML = `
 		<p>${formatTzName(timezone, 1)}</p><p>${formatTzName(timezone, 0)}</p>
-		<span>${moment.tz(timezone).format('h[:]mm[:]ss A')}</span>
+		<span>${moment.tz(timezone).format('hh[:]mm[:]ss A')}</span>
 		`;
 		}
 		addButtonContent();
@@ -189,69 +252,6 @@ function updateTimeCard(tz) {
 	}
 
 	/* ADDITIONAL DATA/INFO SECTION */
-	/* Popular Timezone Names */
-	const abbrs = {
-		ACDT: 'ACDT, Australian Central Daylight Time',
-		ACST: 'ACST, Australian Central Standard Time',
-		ADT: 'ADT, Atlantic Daylight Time',
-		AEDT: 'AEDT, Australian Eastern Daylight Time',
-		AEST: 'AEST, Australian Eastern Standard Time',
-		AKDT: 'AKDT, Alaska Daylight Time',
-		AST: 'AST, Atlantic Standard Time',
-		AWST: 'AWST, Australian Western Standard Time',
-		BST: 'BST, British Summer Time',
-		CAT: 'CAT, Central Africa Time',
-		CDT: 'CDT, Central Daylight Time',
-		CET: 'CET, Central European Time',
-		CEST: 'CEST, Central European Summer Time',
-		ChST: 'CHST, Chamorro Standard Time',
-		CST: 'CST, Central Standard Time',
-		EAT: 'EAT, East Africa Time',
-		EAST: 'EAST, Eastern European Summer Time',
-		EDT: 'EDT, Eastern Daylight Time',
-		EEST: 'EEST, Eastern European Summer Time',
-		EET: 'EET, Eastern European Time',
-		EST: 'EST, Eastern Standard Time',
-		GET: 'GET, Georgia Standard Time',
-		GMT: 'GMT, Greenwich Mean Time',
-		GST: 'GST, Gulf Standard Time',
-		HDT: 'HDT, Hawaii–Aleutian Daylight Time',
-		HST: 'HST, Hawaii Standard Time',
-		IDT: 'IDT, Israel Daylight Time',
-		IRST: 'IRST, Iran Standard Time',
-		IST: 'IST, Indian Standard Time',
-		JST: 'JST, Japan Standard Time',
-		KST: 'KST, Korean Standard Time',
-		LHDT: 'LHDT, Lord Howe Daylight Time',
-		LHST: 'LHST, Lord Howe Standard Time',
-		MSK: 'MSK, Moscow Standard Time',
-		MST: 'MST, Mountain Standard Time',
-		MSK: 'MSK, Moscow Standard Time',
-		MT: 'MT, Mountain Time',
-		MDT: 'MDT, Mountain Daylight Time',
-		MUT: 'MUT, Mauritius Time',
-		MYT: 'MYT, Malaysia Time',
-		NDT: 'NDT, Newfoundland Time',
-		NPT: 'NPT, Nepal Time',
-		NST: 'NST, North Sumatra Time',
-		NZDT: 'NZDT, New Zealand Daylight Time',
-		PDT: 'PDT, Pacific Daylight Time',
-		PKT: 'PKT, Pakistan Standard Time',
-		PST: 'PST, Pacific Standard Time',
-		SAST: 'SAST, South African Standard Time',
-		SST: 'SST, Samoa Standard Time',
-		RET: 'RET, Reunion Time',
-		SCT: 'SCT, Seychelles Time',
-		SLST: 'SLST, Sri Lanka Standard Time',
-		SGT: 'SGT, Singapore Time',
-		TRT: 'TRT, Turkey Time',
-		VET: 'VET, Venezuela Standard Time',
-		WAT: 'WAT, West African Time',
-		WEST: 'WEST, Western European Summer Time',
-		WET: 'WET, Western European Time',
-		WIB: 'WIB, Western Indonesian Time',
-	};
-
 	/* Override Moment's default abbreviations */
 	moment.fn.zoneName = function () {
 		const abbr = this.zoneAbbr();
