@@ -106,13 +106,9 @@ Functionality ************
 // Initial timezone
 function renderUserLocation() {
 	const savedLocation = localStorage.getItem('location');
-	if (savedLocation) {
-		updateTimeCard(savedLocation);
-		updateAnalogClock(savedLocation);
-	} else {
-		updateTimeCard(moment.tz.guess());
-		updateAnalogClock(moment.tz.guess());
-	}
+	savedLocation
+		? updateTimeCard(savedLocation)
+		: updateTimeCard(moment.tz.guess());
 }
 
 renderUserLocation();
@@ -128,7 +124,6 @@ toggleTzButton.addEventListener('click', function () {
 
 tzDropdown.addEventListener('change', function (event) {
 	updateTimeCard(event.target.value);
-	updateAnalogClock(event.target.value);
 });
 
 // Shuffle Timezones Button
@@ -143,7 +138,6 @@ shuffleButton.addEventListener('click', function () {
 // Current Location Button
 userTzButton.addEventListener('click', function () {
 	updateTimeCard(moment.tz.guess());
-	updateAnalogClock(moment.tz.guess());
 
 	removeActiveTzButtons();
 });
@@ -213,7 +207,6 @@ function generateRandomTzButtons() {
 
 			button.classList.add('active');
 			updateTimeCard(timezone);
-			updateAnalogClock(timezone);
 
 			document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
 		});
@@ -222,14 +215,16 @@ function generateRandomTzButtons() {
 
 generateRandomTzButtons();
 
-// Update Time Card content
+// Update Time Card
 function updateTimeCard(tz) {
 	localStorage.setItem('location', tz);
 
-	clearInterval(digitalClockInterval);
-
+	updateTimeData(tz);
 	updateDigitalClock(tz);
+	updateAnalogClock(tz);
+}
 
+function updateTimeData(tz) {
 	// Override Moment's default abbreviations
 	moment.fn.zoneName = function () {
 		const abbr = this.zoneAbbr();
@@ -265,14 +260,7 @@ function updateTimeCard(tz) {
 }
 
 function updateDigitalClock(tz) {
-	timeCardHeading.innerHTML = `${formatTzName(tz, 1)}`;
-	digitalTime.innerHTML = `${moment.tz(tz).format('hh[:]mm')}`;
-	digitalSeconds.innerHTML = `${moment.tz(tz).format('[:]ss')}`;
-
-	digitalClockInterval = setInterval(() => {
-		digitalTime.innerHTML = `${moment.tz(tz).format('hh[:]mm')}`;
-		digitalSeconds.innerHTML = `${moment.tz(tz).format('[:]ss')}`;
-	}, 1000);
+	clearInterval(digitalClockInterval);
 
 	if (moment.tz(tz).format('A') === 'AM') {
 		digitalAM.classList.add('active');
@@ -281,6 +269,12 @@ function updateDigitalClock(tz) {
 		digitalAM.classList.remove('active');
 		digitalPM.classList.add('active');
 	}
+
+	timeCardHeading.innerHTML = `${formatTzName(tz, 1)}`;
+	digitalTime.innerHTML = `${moment.tz(tz).format('hh[:]mm')}`;
+	digitalSeconds.innerHTML = `${moment.tz(tz).format('[:]ss')}`;
+
+	digitalClockInterval = setInterval(() => updateDigitalClock(tz), 1000);
 }
 
 function updateAnalogClock(tz) {
