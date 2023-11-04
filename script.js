@@ -170,18 +170,18 @@ function formatTzName(tz, i) {
 	return tz.split('/')[i].replace(/_/g, ' ');
 }
 
-// Random index for timezone array
-function getRandomTz(array) {
-	const randomIndex = Math.floor(Math.random() * array.length);
-	return array[randomIndex];
-}
-
 // Add timezones to dropdown
 for (const timezone of allTimezones) {
 	const option = document.createElement('option');
 	option.value = timezone;
 	option.textContent = timezone;
 	tzDropdown.appendChild(option);
+}
+
+// Random index for timezone array
+function getRandomTz(array) {
+	const randomIndex = Math.floor(Math.random() * array.length);
+	return array[randomIndex];
 }
 
 // Generate 30 unique timezone buttons
