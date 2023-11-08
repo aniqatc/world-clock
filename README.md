@@ -4,13 +4,11 @@
 
 🕰️ A fully responsive, minimalistic and sleek analog and digital time dashboard that features over 550 global timezones. Users can choose from the randomly generated list of 30 timezones or they can search through the dropdown. Additional data points are included for each selected timezone.
 
-
 ## Design
 
 <a href="https://clock.aniqa.dev/" target="_blank">
 <img src="/assets/og-img.png" style="max-width: 100%;">
 </a>
-
 
 ## Tech
 
@@ -58,6 +56,7 @@
 
 **Behind-the-Scenes**
 
+- Basic PWA
 - String manipulation to format the timezone names
 - Array transformations to filter out timezones without a continental affiliation
 - Overwrite `moment.js` abbreviations to use my own abbreviations object
