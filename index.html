@@ -81,9 +81,6 @@
 		<link
 			href="https://fonts.cdnfonts.com/css/cursed-timer-ulil"
 			rel="stylesheet" />
-		<script
-			src="https://kit.fontawesome.com/50cde61edc.js"
-			crossorigin="anonymous"></script>
 
 		<!-- Moment.js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
@@ -97,25 +94,53 @@
 	<body>
 		<aside>
 			<div class="option-button-group">
-				<button id="shuffle-tz-btn">Shuffle Timezones</button>
-				<button id="list-tz-btn">List of Timezones</button>
-				<button id="user-tz-btn">
-					<i class="fa-solid fa-location-dot"></i>
+				<button
+					type="button"
+					class="option-button"
+					id="search-toggle-btn"
+					aria-expanded="false"
+					aria-controls="search-wrapper">
+					Find a City <kbd id="search-shortcut">Ctrl K</kbd>
+				</button>
+				<button
+					type="button"
+					class="option-button option-button--icon"
+					id="user-tz-btn"
+					aria-label="Show my time zone">
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						aria-hidden="true">
+						<path
+							d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"
+							fill="currentColor" />
+					</svg>
 				</button>
 			</div>
-			<select
-				class="tz-dropdown"
-				id="tz-dropdown">
-				<option
-					value="#"
-					disabled
-					selected>
-					Find Your Timezone
-				</option>
-			</select>
+			<div
+				class="search-wrapper"
+				id="search-wrapper"
+				hidden>
+				<label
+					for="city-search"
+					class="visually-hidden"
+					>Search for a city or time zone</label
+				>
+				<input
+					class="tz-search"
+					id="city-search"
+					type="search"
+					list="city-list"
+					placeholder="Search 500+ cities and time zones"
+					autocomplete="off" />
+				<datalist id="city-list"></datalist>
+			</div>
 		</aside>
 		<main>
-			<section class="time-card-wrapper">
+			<section
+				class="time-card-wrapper"
+				id="time-card">
 				<div class="time-card--heading">
 					<h1>Your Location</h1>
 					<h2>Time Card</h2>
@@ -123,7 +148,9 @@
 				<div class="clock-wrapper">
 					<svg
 						class="clock--analog"
-						viewBox="-130 -130 260 340">
+						viewBox="-130 -130 260 340"
+						role="img"
+						aria-label="Analog and digital clock">
 						<rect
 							class="clock--digital-bg"
 							height="210"
@@ -300,20 +327,94 @@
 				<div class="tz-data-wrapper">
 					<h3>Current Date</h3>
 					<ul>
-						<li>Region: <span id="tz-region"></span></li>
-						<li id="tz-official-name"></li>
-						<li>Day of Year: <span id="tz-day-year"></span></li>
+						<li>
+							<span id="tz-label">Timezone</span>:
+							<span id="tz-official-name"></span>
+						</li>
+						<li>Compared to you: <span id="tz-relative"></span></li>
+						<li>Right now: <span id="tz-status"></span></li>
 						<li>Daylight Saving Time: <span id="tz-daylight"></span></li>
 					</ul>
-					<p id="tz-google"></p>
+					<div class="time-card--actions">
+						<button
+							type="button"
+							class="pin-button"
+							id="pin-btn"
+							aria-pressed="false">
+							Pin City
+						</button>
+						<a
+							id="tz-google"
+							href="https://www.google.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Search on Google</a
+						>
+					</div>
 				</div>
 			</section>
 			<div class="timezone-wrapper">
-				<div class="timezone-button-group"></div>
+				<section class="shift-card">
+					<div class="shift-card--heading">
+						<label for="shift-range">Shift Time</label>
+						<div class="shift-card--controls">
+							<output
+								id="shift-label"
+								for="shift-range"
+								>Now</output
+							>
+							<button
+								type="button"
+								class="dark-button"
+								id="shift-reset-btn"
+								disabled>
+								Back to Now
+							</button>
+						</div>
+					</div>
+					<input
+						id="shift-range"
+						type="range"
+						min="-720"
+						max="720"
+						step="15"
+						value="0"
+						aria-valuetext="Now" />
+					<div
+						class="shift-card--scale"
+						aria-hidden="true">
+						<span>−12h</span><span>Now</span><span>+12h</span>
+					</div>
+				</section>
+
+				<section aria-labelledby="pinned-heading">
+					<div class="section-heading">
+						<h2 id="pinned-heading">Pinned</h2>
+						<span id="pinned-count"></span>
+					</div>
+					<div
+						class="timezone-button-group timezone-button-group--pinned"
+						id="pinned-group"></div>
+				</section>
+
+				<section aria-labelledby="explore-heading">
+					<div class="section-heading">
+						<h2 id="explore-heading">Explore</h2>
+						<button
+							type="button"
+							class="option-button"
+							id="shuffle-tz-btn">
+							Shuffle Timezones
+						</button>
+					</div>
+					<div
+						class="timezone-button-group"
+						id="explore-group"></div>
+				</section>
 			</div>
 		</main>
 		<footer>
-			Coded by
+			Built by
 			<a
 				href="https://aniqa.dev"
 				target="_blank"

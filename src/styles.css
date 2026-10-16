@@ -12,22 +12,21 @@
 }
 
 html {
-	height: 100%;
+	min-height: 100%;
 }
 
 body {
-	height: 100%;
+	min-height: 100%;
 	background-color: #fcfcfc;
 	font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
 	margin: 0 auto;
-	padding: 100px 0;
-	max-width: 1024px;
+	padding: 80px 24px;
+	max-width: 1072px;
 	overflow-x: hidden;
 
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	flex-direction: column;
+	gap: 24px;
 }
 
 img,
@@ -56,6 +55,24 @@ button {
 	border: 0;
 }
 
+[hidden] {
+	display: none !important;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+:focus-visible {
+	outline: 2px solid #3b3b3b;
+	outline-offset: 2px;
+}
+
 aside,
 footer {
 	align-self: end;
@@ -65,7 +82,6 @@ footer {
 footer {
 	color: #747474;
 	font-size: 12px;
-	margin-top: 12px;
 }
 
 a {
@@ -88,22 +104,24 @@ ul {
 /* Main Container Layout */
 main {
 	display: grid;
-	grid-template-columns: 1fr 2fr;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
 	gap: 36px;
-	align-items: center;
-	justify-content: center;
-
-	margin-top: 16px;
+	align-items: start;
 }
 
 /******************************/
-/* Option Buttons: Shuffle & List Toggle */
+/* Option Buttons: Search, Location & Shuffle */
 .option-button-group {
 	display: flex;
+	justify-content: flex-end;
 	gap: 14px;
 }
 
-.option-button-group button {
+.option-button {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 40px;
 	padding: 8px 16px;
 	border-radius: 4px;
 	font-family: 'DM Mono', monospace;
@@ -111,18 +129,30 @@ main {
 	color: #000;
 	background-color: #efefef;
 	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
 
 	transition: all 200ms ease-in;
 }
 
-.option-button-group button:hover {
+.option-button--icon {
+	justify-content: center;
+	width: 40px;
+	padding: 0;
+}
+
+.option-button:hover {
 	background-color: #e3e3e3;
-	cursor: pointer;
 	animation: shake 800ms ease infinite;
 }
 
-.option-button-group button:active {
+.option-button:active {
 	animation-play-state: paused;
+}
+
+.option-button kbd {
+	font-family: 'DM Mono', monospace;
+	font-size: 12px;
+	color: #747474;
 }
 
 @keyframes shake {
@@ -144,40 +174,30 @@ main {
 }
 
 /******************************/
-/* Timezone Dropdown */
-select::-ms-expand {
-	display: none;
-}
-
-select {
-	-webkit-appearance: none;
-	appearance: none;
-
-	background-color: #fff;
-	color: #000;
-
-	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23747474%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-	background-repeat: no-repeat;
-	background-position: right 16px top 50%;
-	background-size: 14px;
-}
-
-.tz-dropdown {
+/* City Search */
+.search-wrapper {
 	margin-top: 16px;
+	width: min(100%, 420px);
+	margin-left: auto;
+}
+
+.tz-search {
 	width: 100%;
 	border: 0;
 	padding: 8px 16px;
 	border-radius: 4px;
 	font-family: 'DM Mono', monospace;
 	font-size: 14px;
+	color: #000;
+	background-color: #fff;
 	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
-
-	display: none;
 }
 
 /******************************/
 /* Main Time Card */
 .time-card-wrapper {
+	position: sticky;
+	top: 24px;
 	background-color: #fff;
 	box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 4px;
@@ -195,6 +215,8 @@ select {
 
 	display: flex;
 	justify-content: space-between;
+	align-items: baseline;
+	gap: 12px;
 }
 
 .time-card--heading h1,
@@ -205,12 +227,15 @@ select {
 
 .time-card--heading h1 {
 	font-weight: 600;
+	min-width: 0;
+	overflow-wrap: anywhere;
 }
 
 .time-card--heading h2 {
 	font-weight: 400;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+	white-space: nowrap;
 	color: rgba(64, 64, 64, 0.6);
 }
 
@@ -245,8 +270,9 @@ select {
 /******************************/
 /* Clock SVG: Analog Clock */
 .clock--analog {
-	min-width: 350px;
-	height: 350px;
+	width: 100%;
+	max-width: 350px;
+	height: auto;
 }
 
 .clock--border {
@@ -335,206 +361,333 @@ select {
 	font-weight: 300;
 }
 
-.tz-data-wrapper li span {
+.tz-data-wrapper li span:not(#tz-label) {
 	font-weight: 500;
-	text-transform: capitalize;
 }
 
-.tz-data-wrapper p {
-	margin-top: 8px;
+.time-card--actions {
+	margin-top: 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.time-card--actions a {
 	font-size: 12px;
-
-	text-align: end;
-}
-
-.tz-data-wrapper a {
 	color: rgba(18, 18, 18, 0.6);
-	transition: all 200ms ease-in;
+	white-space: normal;
 }
 
-.tz-data-wrapper a:hover {
+.time-card--actions a:hover {
 	color: #000;
 }
 
+.pin-button {
+	padding: 6px 12px;
+	border-radius: 4px;
+	font-family: 'DM Mono', monospace;
+	font-size: 12px;
+	color: #000;
+	background-color: #efefef;
+	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+
+	transition: all 200ms ease-in;
+}
+
+.pin-button:hover {
+	background-color: #e3e3e3;
+}
+
+.pin-button[aria-pressed='true'] {
+	background-color: #3b3b3b;
+	color: #efefef;
+	box-shadow: none;
+}
+
+.pin-button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
 /*****************************/
-/* Timezone Buttons */
+/* Shift Time Card */
+.timezone-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.shift-card {
+	background-color: #fff;
+	box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	padding: 16px 24px;
+}
+
+.shift-card--heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.shift-card--heading label,
+.section-heading h2 {
+	font-family: 'DM Mono', monospace;
+	font-size: 14px;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: rgba(64, 64, 64, 0.75);
+}
+
+.shift-card--controls {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.shift-card--controls output {
+	font-family: 'DM Mono', monospace;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.dark-button {
+	padding: 8px 14px;
+	border-radius: 4px;
+	font-family: 'DM Mono', monospace;
+	font-size: 13px;
+	color: #efefef;
+	background-color: #3b3b3b;
+	cursor: pointer;
+
+	transition: all 200ms ease-in;
+}
+
+.dark-button:disabled {
+	background-color: #efefef;
+	color: #747474;
+	cursor: default;
+}
+
+#shift-range {
+	width: 100%;
+	height: 32px;
+	margin-top: 4px;
+	accent-color: #f02d2d;
+	cursor: pointer;
+}
+
+.shift-card--scale {
+	display: flex;
+	justify-content: space-between;
+	font-family: 'DM Mono', monospace;
+	font-size: 12px;
+	color: #747474;
+}
+
+/*****************************/
+/* City Grids: Pinned & Explore */
+.section-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.section-heading span {
+	font-size: 12px;
+	color: #747474;
+}
+
 .timezone-button-group {
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 	gap: 4px;
 }
 
-.timezone-button-group button {
-	padding: 18px 8px 12px;
+.timezone-button-group--pinned {
+	grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+	gap: 8px;
+}
+
+.timezone-button-group--pinned:empty::before {
+	content: 'Pick a city and press Pin City to keep it here.';
+	grid-column: 1 / -1;
+	font-size: 14px;
+	color: #747474;
+}
+
+.tz-tile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	padding: 16px 8px 12px;
 	border-radius: 4px;
 	background-color: transparent;
+	color: rgba(64, 64, 64, 0.75);
+	text-align: center;
+	white-space: normal;
+	cursor: pointer;
 
 	transition: all 300ms ease-in-out;
 }
 
-.timezone-button-group button:hover {
+.tz-tile:hover {
 	background-color: #efefef;
-	cursor: pointer;
 	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.timezone-button-group button:hover p {
+.tz-tile--city {
+	font-size: 18px;
+	overflow-wrap: anywhere;
+}
+
+.tz-tile:hover .tz-tile--city,
+.tz-tile--time {
 	color: #000;
 }
 
-.timezone-button-group button.active {
-	background-color: #3b3b3b;
+.tz-tile--region,
+.tz-tile--relative,
+.tz-tile--ampm {
+	font-size: 12px;
 }
 
-.timezone-button-group button.active p {
+.tz-tile--relative {
+	font-weight: 600;
+}
+
+.tz-tile--time {
+	font-family: 'DM Mono', monospace;
+	font-size: 14px;
+}
+
+/* Pinned tiles sit on white cards with a bigger time */
+.tz-tile--pinned {
+	padding: 18px 12px 14px;
+	gap: 6px;
+	background-color: #fff;
+	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.tz-tile--pinned .tz-tile--time {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+/* Active tile, same dark state as the original grid */
+.tz-tile.active {
+	background-color: #3b3b3b;
+	box-shadow: none;
+}
+
+.tz-tile.active .tz-tile--city,
+.tz-tile.active .tz-tile--time {
 	color: #efefef;
 }
 
-.timezone-button-group button.active span {
+.tz-tile.active .tz-tile--region,
+.tz-tile.active .tz-tile--relative,
+.tz-tile.active .tz-tile--ampm {
 	color: #cecece;
-	visibility: visible;
 }
 
-.timezone-button-group button p:first-of-type {
-	font-size: 18px;
+/*****************************/
+/* Day/Night Strip */
+.day-strip {
+	position: relative;
+	display: flex;
+	gap: 1px;
+	width: 80%;
+	height: 5px;
+	margin: 2px 0;
 }
 
-.timezone-button-group button p:last-of-type {
-	font-size: 12px;
+.tz-tile--pinned .day-strip {
+	width: 100%;
+	height: 8px;
 }
 
-.timezone-button-group button p {
-	color: rgba(64, 64, 64, 0.75);
+.day-strip--hour {
+	flex: 1;
+	border-radius: 1px;
 }
 
-.timezone-button-group span {
-	font-size: 12px;
-	font-weight: 600;
-	visibility: hidden;
-	transition: all 200ms ease-in;
+.day-strip--day {
+	background-color: #e3e3e3;
 }
 
-.timezone-button-group button:hover span {
-	visibility: visible;
+.day-strip--dusk {
+	background-color: #9a9a9a;
+}
+
+.day-strip--night {
+	background-color: #252525;
+}
+
+.tz-tile.active .day-strip--day {
+	background-color: #5a5a5a;
+}
+
+.tz-tile.active .day-strip--night {
+	background-color: #121212;
+}
+
+.day-strip--marker {
+	position: absolute;
+	top: -3px;
+	bottom: -3px;
+	width: 2px;
+	margin-left: -1px;
+	background-color: #f02d2d;
 }
 
 /****************************/
 /* MEDIA QUERIES */
 
-/* 1150px */
-@media (max-width: 1150px) {
-	/* General */
-	main {
-		gap: 16px;
-	}
-
-	aside,
-	footer {
-		margin-right: 24px;
-	}
-
-	button {
-		white-space: normal;
-	}
-
-	/* Timezone Buttons */
-	.timezone-button-group {
-		grid-template-columns: repeat(4, 1fr);
-	}
-
-	.timezone-button-group button:nth-child(n + 29) {
-		display: none;
-	}
-}
-
-/* 950px */
-@media (max-width: 930px) {
-	/* Timezone Buttons */
-	.timezone-button-group {
-		grid-template-columns: repeat(3, 1fr);
-	}
-
-	.timezone-button-group button:nth-child(n + 19) {
-		display: none;
-	}
-}
-
-/* 880px */
+/* 820px */
 @media (max-width: 820px) {
-	/* General */
-	html {
-		height: auto;
-	}
-
 	body {
-		padding: 16px 0;
+		padding: 24px 16px;
 	}
 
 	main {
 		grid-template-columns: 1fr;
-		gap: 8px;
+		gap: 24px;
 	}
 
 	aside,
 	footer {
-		margin: 24px auto;
 		align-self: center;
 		text-align: center;
 	}
 
-	/* Timezone Buttons */
-	.timezone-button-group {
-		grid-template-columns: repeat(4, 1fr);
+	.option-button-group {
+		justify-content: center;
 	}
 
-	.timezone-button-group button:nth-child(n + 21) {
-		display: block;
-	}
-}
-
-/* 660px */
-@media (max-width: 660px) {
-	/* Timezone Buttons */
-	.timezone-button-group {
-		grid-template-columns: repeat(3, 1fr);
-		padding: 0 12px;
+	.search-wrapper {
+		margin-right: auto;
 	}
 
-	.timezone-button-group button:nth-child(n + 19) {
-		display: block;
-	}
-
-	.timezone-button-group button {
-		padding: 16px 4px;
+	.time-card-wrapper {
+		position: static;
+		width: 100%;
+		max-width: 420px;
+		margin: 0 auto;
 	}
 }
 
 /* 420px */
 @media (max-width: 420px) {
-	main {
-		width: 100%;
-	}
-
-	aside {
-		padding: 0 10px;
-		width: 100%;
-	}
-
-	/* Option Buttons: Shuffle/List */
-	.option-button-group {
-		display: grid;
-		grid-template-columns: 1fr;
-	}
-
-	.option-button-group button:first-of-type {
-		grid-column: span 2;
-	}
-
-	/* Time Card */
-	.clock--analog {
-		min-width: revert;
-	}
-
 	.time-card--heading {
 		flex-wrap: wrap-reverse;
 		gap: 4px;
@@ -548,24 +701,32 @@ select {
 	}
 
 	.tz-data-wrapper,
-	.tz-data-wrapper p {
+	.time-card--actions {
 		text-align: center;
-	}
-
-	/* Timezone Buttons */
-	.timezone-wrapper {
-		margin: 0 20px;
-	}
-
-	.timezone-button-group button:nth-child(n + 19) {
-		display: none;
+		justify-content: center;
 	}
 
 	.timezone-button-group {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
-	.timezone-button-group button p:first-of-type {
-		font-size: 16px;
+	.tz-tile--pinned .tz-tile--time {
+		font-size: 18px;
+	}
+}
+
+/* Touch screens have no keyboard shortcut */
+@media (hover: none) {
+	.option-button kbd {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
 	}
 }
