@@ -1,68 +1,78 @@
-## World Clock Dashboard
+# World Clock Dashboard
 
-[https://clock.aniqa.dev/](https://clock.aniqa.dev/)
+An analog and digital clock for 500+ time zones. Pin the cities you care about, slide time forward or back to plan across zones, and see at a glance who's awake.
 
-🕰️ A fully responsive, minimalistic and sleek analog and digital time dashboard that features over 550 global timezones. Users can choose from the randomly generated list of 30 timezones or they can search through the dropdown. Additional data points are included for each selected timezone.
+**[Live site](https://clock.aniqa.dev)**
 
-## Design
-
-<a href="https://clock.aniqa.dev/" target="_blank">
-<img src="/assets/og-img.png" style="max-width: 100%;">
-</a>
+<!-- TODO: retake assets/og-img.png with the redesign (time card, Shift Time slider and pinned tiles); it still shows the 2023 layout -->
+<a href="https://clock.aniqa.dev"><img src="assets/og-img.png" alt="The world clock: an analog and digital time card for the selected city beside a grid of other cities" width="800"></a>
 
 ## Tech
 
-- HTML5
-- CSS3
-- JavaScript
-- Moment.js
+- HTML, CSS and JavaScript, no build step
+- [Moment Timezone](https://momentjs.com/timezone/) for time zone data and formatting
+- An SVG analog clock with a digital readout
+- A web app manifest and icons, so it can be added to your home screen
 
-## Key Features
+## Features
 
-**Design**
+- **Time card:** analog and digital time, the date, the time zone, how far ahead of you it is, whether it's working hours there and its daylight saving status
+- **Pinned cities:** up to 8, starting with your zone and five others; pin or unpin from the time card
+- **Shift Time:** a slider that moves every clock up to 12 hours either way
+- **Explore:** 24 random cities with "Shuffle Timezones" for a new set
+- **Find a City:** search by name, or press Cmd+K / Ctrl+K; the location button jumps back to your zone
+- Remembers your pinned cities and last selected city
 
-- Analog and digital clock drawn using SVG elements
-- Minimalistic color scheme
-- Fully responsive webpage utilizing a grid layout
-- “Time Card” section designed to be focal point
-- Subtle button animations and custom dropdown styling
-- Grid layout showcasing different cities/regions
-- Hover and active styling for timezone grid items
+## Design
 
-**Time Card**
+- Keeps the original look: DM Sans and DM Mono, the white time card, red second hand and dark digital panel
+- Every city tile shows its time, its offset from you ("+5h · Tomorrow") and a 24-hour day/night strip with a red marker for the current hour
+- The time card stays in view on desktop while you scroll the grids; on phones it sits on top and picking a city scrolls back to it
 
-- Seconds-hand moves around the analog clock every second
-- Digital time is updated every second
-- Current day and date
-- Region, timezone, number of the day of the year (out of 365) and daylight savings time
-- Option to search about the active region on Google
+## Accessibility
 
-**Timezone Grid**
+- Tiles and the pin button use `aria-pressed`, so screen readers announce the selected city
+- The slider reads its value aloud as "+3h" rather than "180"
+- The search has a label, and Escape closes it
+- Animations and smooth scrolling are off when reduced motion is on
 
-- Randomized timezones to choose from - labeled by city name and region
-- Hover state shows the current time of that timezone
-- Active state shows the current time on the selected timezone until another location is selected
-- Selecting a timezone from the grid will update the Time Card
+## Project structure
 
-**Interactive Elements**
+- `index.html`: the page, including the SVG clock face
+- `src/script.js`: time zone list, search, tiles, time card and the clock loop
+- `src/styles.css`: layout, tiles, day/night strips and two breakpoints
+- `assets/` and `manifest.json`: icons, preview image and the app manifest
 
-- “Shuffle Timezones” button randomizes the timezone grid
-- “List of Timezones” button toggles the dropdown selector with every timezone
-- Location marker button selects user’s current location
+## Key concepts
 
-**Data**
+- **One clock loop.** A single `setInterval` updates the time card and every tile from the same moment, lined up to the start of each second. The first version started a new interval for every tile on every shuffle and never cleared them.
+- **Shifting time.** The slider adds minutes to that shared moment, so every clock and marker moves together.
+- **Unique random cities.** A Fisher–Yates shuffle picks the Explore grid, so a city can't appear twice.
+- **Spelled-out time zones.** My own abbreviation map overrides Moment's, so "EDT" reads as "EDT, Eastern Daylight Time"; zones without a name show their offset instead.
 
-- Moment.js library to get timezone data
+## Setup
 
-**Behind-the-Scenes**
+No build step or API keys. Serve the folder locally, since the page loads its files from root paths:
 
-- Basic PWA
-- String manipulation to format the timezone names
-- Array transformations to filter out timezones without a continental affiliation
-- Overwrite `moment.js` abbreviations to use my own abbreviations object
-- DOM manipulation to generate random buttons and to add 500+ timezone names into dropdown
-- Ensuring timezones show a random selection of timezones without repeating
-- `localStorage` to save a user’s last selected location
-- Activate smooth scrolling up to the Time Card on mobile devices
-- `setInterval` in order to update time every second and `clearInterval` to avoid conflicts whenever a new timezone is selected
-- Formatting time using only `moment.js` methods
+```bash
+git clone https://github.com/aniqatc/world-clock.git
+cd world-clock
+python3 -m http.server
+```
+
+## Changelog
+
+### October 2026
+
+- Redesigned around pinned cities, a Shift Time slider and day/night strips, keeping the original style
+- Replaced the full dropdown with a city search and keyboard shortcut
+- Fixed repeated cities in the grid, intervals piling up on every shuffle, cities like Buenos Aires showing as "Argentina" and an hour hand that only moved on the hour
+- Removed Font Awesome in favor of one inline icon
+
+### November 2023
+
+- Added the app manifest and icons, and cleaned up the time card functions
+
+### October 2023
+
+- Initial release
